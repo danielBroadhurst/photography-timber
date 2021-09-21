@@ -3,3 +3,349 @@
  * Description: Starter Theme to use with Timber
  * Author: Upstatement and YOU!
 */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap");
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: "Noto Sans", sans-serif;
+  background: #1c1d22;
+  color: white;
+}
+
+.content-wrapper {
+  padding: 0 0.5em 0.5em 0.5em;
+}
+
+.content {
+  max-width: 1024px;
+  flex: 1 0 auto;
+  margin: auto;
+}
+
+.footer {
+  flex-shrink: 0;
+  text-align: center;
+  padding-top: 3em;
+  padding-bottom: 1em;
+  background-color: #313d3e;
+}
+
+.blog-title {
+  padding-left: 1em;
+  padding-bottom: 5px;
+}
+
+.blog-item a {
+  color: white;
+}
+
+header > .wrapper {
+  display: flex;
+  justify-content: space-between;
+  background-color: #313d3e;
+}
+
+.blog-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.blog-item {
+  position: relative;
+  height: 40vh;
+  flex-grow: 1;
+  color: white;
+  padding: 0.5em;
+  background-color: white;
+  margin: 0.5em;
+}
+
+.blog-imageOverlay {
+  display: flex;
+  flex-flow: column;
+  align-items: baseline;
+  justify-content: flex-end;
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  padding: 1em;
+  z-index: 2;
+}
+
+.blog-imageOverlay:hover {
+  opacity: 100;
+  transition: all ease-in-out 300ms;
+}
+
+.blog-thumbnail {
+  max-height: 100%;
+  min-width: 100%;
+  object-fit: cover;
+  vertical-align: bottom;
+}
+
+.blog-item:last-child {
+  flex-grow: 10;
+}
+
+.blog-date {
+  margin: 0;
+}
+
+.blog-item:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #5c5c5c65; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    45deg,
+    #0000006c,
+    #0000002a
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    45deg,
+    #0000006c,
+    #0000002a
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.page-featuredImage {
+  width: 100%;
+  height: calc(100vh - 62px);
+  object-fit: contain;
+}
+
+.blog-title a {
+  color: white;
+  text-decoration: none;
+}
+
+.blog-title a:hover {
+  color: #d00022;
+  text-shadow: 0px 0px 1px black;
+}
+
+/* Main Nav */
+.nav-main ul {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  padding: 0px;
+}
+
+.nav-main ul {
+  list-style: none;
+}
+
+.nav-main ul li a {
+  padding: 10px;
+  text-decoration: none;
+  color: white;
+}
+
+.nav-main ul li.menu-item-has-children ul {
+  display: none;
+  position: absolute;
+  padding: 0px;
+}
+
+.nav-main ul li.menu-item-has-children ul li a {
+  font-size: 1.5em;
+}
+
+.nav-main ul li.menu-item-has-children:hover ul {
+  display: block;
+}
+
+.nav-main ul li a:hover {
+  color: #d00022;
+  text-shadow: 0px 0px 1px black;
+}
+
+/* Mobile Menu */
+nav {
+  display: flex;
+  padding-left: 2em;
+}
+
+#menuToggle {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  z-index: 15;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#menuToggle input {
+  display: flex;
+  width: 40px;
+  height: 32px;
+  position: absolute;
+  cursor: pointer;
+  opacity: 0;
+  z-index: 2;
+}
+
+#menuToggle span {
+  display: flex;
+  width: 29px;
+  height: 2px;
+  margin-bottom: 5px;
+  position: relative;
+  background: #ffffff;
+  border-radius: 3px;
+  z-index: 1;
+  transform-origin: 5px 0px;
+  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
+    background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease;
+}
+
+#menuToggle span:first-child {
+  transform-origin: 0% 0%;
+}
+
+#menuToggle span:nth-last-child(2) {
+  transform-origin: 0% 100%;
+}
+
+#menuToggle input:checked ~ span {
+  opacity: 1;
+  transform: rotate(45deg) translate(-3px, -1px);
+  background: #36383f;
+}
+
+#menuToggle input:checked ~ span:nth-last-child(3) {
+  opacity: 0;
+  transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+#menuToggle input:checked ~ span:nth-last-child(2) {
+  transform: rotate(-45deg) translate(0, -1px);
+}
+
+#menu {
+  flex-flow: column;
+  justify-content: flex-start;
+  position: fixed;
+  width: 17em;
+  height: 100vh;
+  box-shadow: 0 0 10px #85888c;
+  margin: -50px 0 0 -50px;
+  padding: 2.4em;
+  padding-top: 5em;
+  background-color: #f5f6fa;
+  -webkit-font-smoothing: antialiased;
+  transform-origin: 0% 0%;
+  transform: translate(-100%, 0);
+  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+  z-index: 0;
+}
+
+#menu li {
+  padding: 10px 0;
+  transition-delay: 2s;
+}
+
+#menuToggle input:checked ~ ul {
+  transform: none;
+  list-style: none;
+}
+
+#menu a {
+  text-decoration: none;
+  color: #d00022;
+  opacity: 1;
+  transition: 200ms;
+}
+
+#menu a:hover {
+  color: #1e1e23;
+  opacity: 0.5;
+}
+
+#menu ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+#menu .nav-drop .nav-drop-item {
+  padding: 0;
+}
+
+#menu .nav-drop .nav-drop-item a {
+  font-size: 1em;
+  color: #1f1f1f;
+}
+
+#menu .nav-drop .nav-drop-item a:hover {
+  font-size: 1em;
+  color: #1e1e23;
+}
+
+.nav-drop-item::before {
+  content: "" "\203A";
+  color: black;
+}
+
+button:disabled {
+  border: none;
+  background-color: transparent;
+  color: grey;
+  font-family: "Kanit", sans-serif;
+}
+
+@media only screen and (max-width: 800px) {
+  /* For tablets: */
+  .blog-imageOverlay {
+    opacity: 0.8;
+  }
+}
+@media only screen and (max-width: 500px) {
+  /* For mobile phones: */
+  .blog-imageOverlay {
+    opacity: 0.8;
+  }
+}
+
+@media (max-aspect-ratio: 1/1) {
+  .blog-item {
+    height: 30vh;
+  }
+}
+@media (max-height: 480px) {
+  .blog-item {
+    height: 80vh;
+  }
+}
+@media (max-aspect-ratio: 1/1) and (max-width: 480px) {
+  .blog-container {
+    flex-direction: row;
+  }
+
+  .blog-item {
+    height: auto;
+    width: 100%;
+  }
+  .blog-thumbnail {
+    width: 100%;
+    max-height: 75vh;
+    min-width: 0;
+  }
+}

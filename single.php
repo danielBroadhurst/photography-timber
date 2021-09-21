@@ -13,6 +13,9 @@ $context         = Timber::context();
 $timber_post     = Timber::get_post();
 $context['post'] = $timber_post;
 
+$cover_image_id = $post->cover_image;
+$context['cover_image'] = new Timber\Image($cover_image_id);
+
 if ( post_password_required( $timber_post->ID ) ) {
 	Timber::render( 'single-password.twig', $context );
 } else {
