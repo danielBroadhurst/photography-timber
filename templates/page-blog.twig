@@ -1,0 +1,11 @@
+{% extends "base.twig" %}
+
+{% block content %}
+	<h1 class="article-h1">{{post.title}}</h1>
+	<div class="blog-container blog-page">
+		{% for post in posts %}
+			{% include ['tease-post-blog.twig'] %}
+		{% endfor %}
+	</div>
+	{% include 'partial/pagination.twig' with { pagination: posts.pagination({show_all: false, mid_size: 3, end_size: 2}) } %}
+{% endblock %}

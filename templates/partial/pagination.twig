@@ -1,64 +1,91 @@
 {% if posts.pagination.pages is not empty %}
-    <nav class="pagination-block">
-        <ul class="pagination">
-
-            {# First #}
-            {% if posts.pagination.pages|first and posts.pagination.pages|first.current != true %}
-                <li class="first btn">
-                    <a href="{{ posts.pagination.pages|first.link }}">First</a>
-                </li>
-            {% else %}
-                <li class="first btn disabled">
-                    <button disabled>First</button>
-                </li>
-            {% endif %}
-
-            {# Previous #}
-            {% if posts.pagination.prev %}
-                <li class="prev btn">
-                    <a href="{{ posts.pagination.prev.link }}">Previous</a>
-                </li>
-            {% else %}
-                <li class="prev btn disabled">
-                    <button disabled>Previous</button>
-                </li>
-            {% endif %}
-
-            {# Pages #}
-            {% for page in posts.pagination.pages %}
-                {% if page.link %}
-                    <li>
-                        <a href="{{ page.link }}" class="{{ page.class }}">{{ page.title }}</a>
-                    </li>
-                {% else %}
-                    <li class="current">
-                        <span class="{{ page.class }}">{{ page.title }}</span>
-                    </li>
-                {% endif %}
-            {% endfor %}
-
-            {# Next #}
-            {% if posts.pagination.next %}
-                <li class="next btn">
-                    <a href="{{ posts.pagination.next.link }}">Next</a>
-                </li>
-            {% else %}
-                <li class="next btn disabled">
-                    <button disabled>Next</button>
-                </li>
-            {% endif %}
-
-            {# Last #}
-            {% if posts.pagination.pages|last and posts.pagination.pages|last.current != true %}
-                <li class="last btn">
-                    <a href="{{ posts.pagination.pages|last.link }}">Last</a>
-                </li>
-            {% else %}
-                <li class="last btn disabled">
-                    <button disabled>Last</button>
-                </li>
-            {% endif %}
-
-        </ul>
-    </nav>
+<nav class="pagination-block">
+  <div class="pagination pagination:container">
+    {# First #} {% if posts.pagination.pages|first and
+    posts.pagination.pages|first.current != true %}
+    <div class="pagination:number">
+      <a href="{{ posts.pagination.pages|first.link }}">First</a>
+    </div>
+    {% else %}
+    <div class="pagination disabled">
+      <button disabled>First</button>
+    </div>
+    {% endif %} {# Previous #} {% if posts.pagination.prev %}
+    <div class="pagination:number arrow:text">
+      <a href="{{ posts.pagination.prev.link }}" class="arrow:text">
+        <svg width="24" height="24" class="arrow:text">
+          <use xlink:href="#left" />
+        </svg>
+        Previous
+      </a>
+    </div>
+    {% else %}
+    <div class="pagination disabled">
+      <button disabled>Previous</button>
+    </div>
+    {% endif %} {# Pages #} {% for page in posts.pagination.pages %} {% if
+    page.link %}
+    <div class="pagination:number">
+      <a href="{{ page.link }}" class="{{ page.class }}">{{ page.title }}</a>
+    </div>
+    {% else %}
+    <div class="pagination:number pagination:active">
+      <span class="{{ page.class }}">{{ page.title }}</span>
+    </div>
+    {% endif %} {% endfor %} {# Next #} {% if posts.pagination.next %}
+    <div class="pagination:number arrow:text">
+      <a href="{{ posts.pagination.next.link }}" class="arrow:text"
+        >Next
+      
+      <svg width="24" height="24" class="arrow:text">
+        <use xlink:href="#right" />
+      </svg>
+    </a>
+    </div>
+    {% else %}
+    <div class="pagination disabled">
+      <button disabled>Next</button>
+    </div>
+    {% endif %} {# Last #} {% if posts.pagination.pages|last and
+    posts.pagination.pages|last.current != true %}
+    <div class="pagination:number">
+      <a href="{{ posts.pagination.pages|last.link }}">Last</a>
+    </div>
+    {% else %}
+    <div class="pagination:number disabled">
+      <button disabled>Last</button>
+    </div>
+    {% endif %}
+  </div>
+</nav>
+<svg class="hide">
+  <symbol
+    id="left"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 30 28"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M15 19l-7-7 7-7"
+    ></path>
+  </symbol>
+  <symbol
+    id="right"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 30 28"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M9 5l7 7-7 7"
+    ></path>
+  </symbol>
+</svg>
 {% endif %}

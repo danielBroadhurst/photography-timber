@@ -1,4 +1,6 @@
-{% extends "tease.twig" %} {% block content %} 
+{% extends "tease.twig" %} 
+
+{% block content %} 
 <a href="{{ post.link }}">
 {% if post.thumbnail.src %}
   <img class="blog-thumbnail" src="{{ post.thumbnail.src }}" />
