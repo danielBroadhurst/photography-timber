@@ -10,22 +10,14 @@
 
 :root {
   --font-family: "Noto Sans", sans-serif;
-  --bg-page: #1a1a1a;
-  --text-color: #f3f3f3;
-  --card-bg: #202020;
-  --icon-bg: #45423c;
-  --blue: #0870f8;
-  --blue-rgb: 8, 112, 248;
-  --orange: #ff9232;
-  --g-purple: linear-gradient(30deg, #85f, #9966ff);
-  --g-yellow: linear-gradient(30deg, #fc0, #fc0);
-  --g-red: linear-gradient(30deg, #f36, #f24);
-  --g-blue: linear-gradient(30deg, #0cf, #0af);
-  --g-purple: linear-gradient(30deg, #85f, #9966ff);
-  --range: 0%;
-  --shadow: rgba(0, 6, 39, 0.1);
-  --light-shadow: rgba(255, 255, 255, 0.8);
-  --light-shadow-2: rgba(255, 255, 255, 0.1);
+  --bg: #1a1a1a;
+  --bg-menu: #1a1a1a;
+  --bg-blog: #000000;
+  --text-color-light: #f3f3f3;
+  --text-color-dark: #000000;
+  --link-color: #f3f3f3;
+  --link-color-hover: #000000;
+  --link-color-active: #000000;
 }
 
 html,
@@ -34,23 +26,41 @@ body {
   margin: 0;
 }
 
+img {
+  max-width: 100%;
+}
+
+.website_logo {
+  padding-left: 10px;
+  padding-bottom: 1em;
+  max-width: 220px;
+}
+
 body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   font-family: var(--font-family);
-  background: #1c1d22;
-  color: var(--text-color);
+  background-color: var(--bg);
+  color: var(--text-color-light);
+}
+
+.menu_background {
+  background-color: var(--bg-menu);
 }
 
 a {
   font-family: var(--font-family);
-  color: var(--text-color);
+  color: var(--link-color);
   text-decoration: none;
 }
-
-.content-wrapper {
-  padding: 0 0.5em 0.5em 0.5em;
+a:hover {
+  color: var(--link-color-hover);
+  text-decoration: underline;
+}
+a:active {
+  color: var(--link-color-active);
+  text-decoration: none;
 }
 
 .content {
@@ -64,7 +74,7 @@ a {
   text-align: center;
   padding-top: 3em;
   padding-bottom: 1em;
-  background-color: #313d3e;
+  background-color: var(--bg-menu);
 }
 
 .blog-title {
@@ -72,19 +82,40 @@ a {
   padding-bottom: 5px;
 }
 
-.blog-item a {
-  color: var(--text-color);
+.wrapper {
+  max-width: 100vw;
+  margin: auto;
 }
 
-.wrapper {
-  max-width: 1460px;
+.home .blog-container {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.article-h1 {
+  font-size: 4em;
+  padding: .5em 0em;
+}
+
+.content-wrapper,
+.article-h1 {
   margin: auto;
+  max-width: 1280px;
+}
+
+.article-content {
+  padding: 0 0.5em 0.5em 0.5em;
+  max-width: 1460px;
+}
+
+.forminator-guttenberg {
+  width: 1024px;
 }
 
 header > .wrapper {
   display: flex;
   justify-content: space-between;
-  background-color: #313d3e;
+  background-color: var(--bg-menu);
 }
 
 .blog-container {
@@ -94,13 +125,25 @@ header > .wrapper {
   margin: auto;
 }
 
+.blog-info img {
+  border-radius: 5px;
+}
+
 .blog-container.blog-page .blog-item {
   height: 60vh;
   display: flex;
 }
 
-.blog-container.blog-page .blog-item:nth-child(odd){
+.blog-container.blog-page .blog-item:nth-child(odd) {
   flex-flow: row-reverse;
+}
+
+.blog-container.blog-page .blog-item .blog-thumbnail {
+  border-radius: 5px 0px 0px 5px;
+}
+
+.blog-container.blog-page .blog-item:nth-child(odd) .blog-thumbnail {
+  border-radius: 0px 5px 5px 0px;
 }
 
 .blog-container.blog-page .blog-item::after {
@@ -111,21 +154,27 @@ header > .wrapper {
   flex-grow: 1;
   padding: 1em;
   background-color: transparent;
-  color: black;
-}
-
-.blog-info a {  
-  color: black;
+  color: var(--text-color-light);
+  
 }
 
 .blog-item {
   position: relative;
   height: 40vh;
   flex-grow: 1;
-  color: var(--text-color);
+  color: var(--text-color-light);
+  background-color: var(--bg-blog);
+  border-radius: 5px;
+  box-shadow: 5px 5px 30px 5px var(--bg-menu);
+  margin-bottom: 1em;
+}
+
+.blog-item.home {
+  box-shadow: none;
   padding: 0.2em;
-  background-color: white;
   margin: 0.2em;
+  margin-bottom: inherit;
+  border-radius: none;
 }
 
 .blog-imageOverlay {
@@ -177,17 +226,17 @@ header > .wrapper {
 
 .page-featuredImage {
   width: 100%;
-  height: calc(100vh - 62px);
-  object-fit: contain;
+  max-height: 80vh;
+  object-fit: cover;
 }
 
 .blog-title a {
-  color: var(--text-color);
+  color: var(--text-color-light);
   text-decoration: none;
 }
 
 .blog-title a:hover {
-  color: #d00022;
+  color: var(--link-color-hover);
   text-shadow: 0px 0px 1px black;
 }
 
@@ -206,7 +255,7 @@ header > .wrapper {
 .nav-main ul li a {
   padding: 10px;
   text-decoration: none;
-  color: var(--text-color);
+  color: var(--text-color-light);
 }
 
 .nav-main ul li.menu-item-has-children ul {
@@ -224,13 +273,14 @@ header > .wrapper {
 }
 
 .nav-main ul li a:hover {
-  color: #d00022;
+  color: var(--link-color-hover);
   text-shadow: 0px 0px 1px black;
 }
 
 /* Mobile Menu */
 nav {
   display: flex;
+  margin: 5px 0px;
   padding-left: 2em;
 }
 
@@ -296,11 +346,11 @@ nav {
   position: fixed;
   width: 17em;
   height: 100vh;
-  box-shadow: 0 0 10px #85888c;
+  box-shadow: 0 0 10px var(--bg);
   margin: -50px 0 0 -50px;
   padding: 2.4em;
   padding-top: 5em;
-  background-color: #f5f6fa;
+  background-color: var(--bg-menu);
   -webkit-font-smoothing: antialiased;
   transform-origin: 0% 0%;
   transform: translate(-100%, 0);
@@ -320,13 +370,13 @@ nav {
 
 #menu a {
   text-decoration: none;
-  color: #d00022;
+  color: var(--link-color);
   opacity: 1;
   transition: 200ms;
 }
 
 #menu a:hover {
-  color: #1e1e23;
+  color: var(--link-color-hover);
   opacity: 0.5;
 }
 
@@ -346,12 +396,12 @@ nav {
 
 #menu .nav-drop .nav-drop-item a:hover {
   font-size: 1em;
-  color: #1e1e23;
+  color: var(--link-color-hover);
 }
 
 .nav-drop-item::before {
   content: "" "\203A";
-  color: black;
+  color: var(--text-color-light);
 }
 
 button:disabled {
@@ -401,17 +451,27 @@ button:disabled {
 }
 @media (hover: hover) {
   .pagination\:number:hover {
-    background: #282828;
+    background: var(--link-color-hover);
+    color: var(--text-color-dark);
+  }
+
+  .pagination\:number:hover > a {
+    color: var(--text-color-dark);
+  }
+
+  .arrow\:text > a:hover {
+    color: var(--text-color-dark);
+    position: relative;
   }
 }
 .pagination\:number:active {
-  background: #282828;
+  background: var(--link-color-hover);
 }
 
 .pagination\:active {
-  background: #282828;
+  background: var(--link-color-hover);
   position: relative;
-}
+
 
 @media only screen and (max-width: 800px) {
   /* For tablets: */

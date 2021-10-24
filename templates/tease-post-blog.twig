@@ -1,14 +1,18 @@
-{% extends "tease-post.twig" %} 
+{% extends "tease-post.twig" %} {% block content %}
+<article
+  class="tease tease-{{ post.post_type }} blog-item"
+  id="tease-{{ post.ID }}"
+>
+  <a href="{{ post.link }}">
+    {% if post.thumbnail.src %}
+    <img class="blog-thumbnail" src="{{ post.thumbnail.src }}" />
+    {% endif %}
+  </a>
+  <div class="blog-info">
+    <h2 class="h2">{{ post.title }}</h2>
+    <p class="blog-date">{{ post.date }}</p>
+    <p>{{ post.preview }}</p>
+  </div>
+</article>
 
-{% block content %} 
-<a href="{{ post.link }}">
-{% if post.thumbnail.src %}
-  <img class="blog-thumbnail" src="{{ post.thumbnail.src }}" />
-  {% endif %}
-</a>
-<div class="blog-info">
-  <h2 class="h2">{{ post.title }}</h2>
-  <p class="blog-date">{{ post.date }}</p>
-  <p>{{post.preview}}</p>
-</div>
 {% endblock %}

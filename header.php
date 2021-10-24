@@ -11,5 +11,7 @@
  * @since   Timber 0.1
  */
 
+// check to see if the logo exists and add it to the page
+
 $GLOBALS['timberContext'] = Timber::context();
 ob_start();

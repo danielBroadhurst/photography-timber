@@ -1,13 +1,2 @@
-<article class="tease tease-{{post.post_type}} blog-item" id="tease-{{post.ID}}">
 	{% block content %}
-	<a href="{{post.link}}">
-		<div class="blog-imageOverlay">
-			<h2 class="h2"><a href="{{post.link}}">{{post.title}}</a></h2>
-			<!-- <p>{{post.preview}}</p> -->
-		</div>
-		</a>
-		{% if post.get_thumbnail %}
-			<img src="{{post.thumbnail.src}}" />
-		{% endif %}
 	{% endblock %}
-</article>
