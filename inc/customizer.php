@@ -18,11 +18,23 @@ function your_theme_new_customizer_settings($wp_customize)
       'height' => 100, // cropper Height
       'width' => 100, // Cropper Width
       'flex_width' => true, //Flexible Width
-      'flex_height' => true, // Flexible Heiht
+      'flex_height' => true, // Flexible Height
     )
   ));
 }
 add_action('customize_register', 'your_theme_new_customizer_settings');
+
+function addColorSetting($wp_customize, $settingName, $settingLabel) {
+  $wp_customize->add_setting($settingName, array(
+    'default'   => '',
+    'transport' => 'refresh',
+    'sanitize_callback' => 'sanitize_hex_color',
+  ));
+  $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, $settingName, array(
+    'section' => 'colors',
+    'label'   => esc_html__($settingLabel, 'theme'),
+  )));
+}
 
 /**
  * Create Color Scheme Settings in Customizer
@@ -30,95 +42,20 @@ add_action('customize_register', 'your_theme_new_customizer_settings');
  * @param [type] $wp_customize
  * @return void
  */
-function theme_customize_register($wp_customize)
-{
-  // Background
-  $wp_customize->add_setting('background', array(
-    'default'   => '',
-    'transport' => 'refresh',
-    'sanitize_callback' => 'sanitize_hex_color',
-  ));
-  $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'background', array(
-    'section' => 'colors',
-    'label'   => esc_html__('Background', 'theme'),
-  )));
-
-  // Blog background
-  $wp_customize->add_setting('blog_background', array(
-    'default'   => '',
-    'transport' => 'refresh',
-    'sanitize_callback' => 'sanitize_hex_color',
-  ));
-  $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'blog_background', array(
-    'section' => 'colors',
-    'label'   => esc_html__('Blog Card Background', 'theme'),
-  )));
-
-  // Menu background
-  $wp_customize->add_setting('menu_background', array(
-    'default'   => '',
-    'transport' => 'refresh',
-    'sanitize_callback' => 'sanitize_hex_color',
-  ));
-  $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'menu_background', array(
-    'section' => 'colors',
-    'label'   => esc_html__('Menu Background', 'theme'),
-  )));
-
-  // Text background Light
-  $wp_customize->add_setting('text_color_light', array(
-    'default'   => '',
-    'transport' => 'refresh',
-    'sanitize_callback' => 'sanitize_hex_color',
-  ));
-  $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'text_color_light', array(
-    'section' => 'colors',
-    'label'   => esc_html__('Text Color Light', 'theme'),
-  )));
-
-  // Text background Dark
-  $wp_customize->add_setting('text_color_dark', array(
-    'default'   => '',
-    'transport' => 'refresh',
-    'sanitize_callback' => 'sanitize_hex_color',
-  ));
-  $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'text_color_dark', array(
-    'section' => 'colors',
-    'label'   => esc_html__('Text Color Dark', 'theme'),
-  )));
-
-    // Text background Dark
-    $wp_customize->add_setting('link_color', array(
-      'default'   => '',
-      'transport' => 'refresh',
-      'sanitize_callback' => 'sanitize_hex_color',
-    ));
-    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'link_color', array(
-      'section' => 'colors',
-      'label'   => esc_html__('Link Color', 'theme'),
-    )));
-
-      // Text background Dark
-  $wp_customize->add_setting('link_color_hover', array(
-    'default'   => '',
-    'transport' => 'refresh',
-    'sanitize_callback' => 'sanitize_hex_color',
-  ));
-  $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'link_color_hover', array(
-    'section' => 'colors',
-    'label'   => esc_html__('Link Hover', 'theme'),
-  )));
-
-    // Text background Dark
-    $wp_customize->add_setting('link_color_active', array(
-      'default'   => '',
-      'transport' => 'refresh',
-      'sanitize_callback' => 'sanitize_hex_color',
-    ));
-    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'link_color_active', array(
-      'section' => 'colors',
-      'label'   => esc_html__('Link Active', 'theme'),
-    )));
+function theme_customize_register($wp_customize) {
+  $controlsArray = array(
+    "background" => "Background",
+    "blog_background" => "Blog Card Background",
+    "menu_background" => "Menu Background",
+    "text_color_light" => "Text Color Light",
+    "text_color_dark" => "Text Color Dark",
+    "link_color" => "Link Color",
+    "link_color_hover" => "Link Hover",
+    "link_color_active" => "Link Active"
+  );
+  foreach ($controlsArray as $key => $value) {
+    addColorSetting($wp_customize, $key, $value);
+  }
 }
 
 add_action('customize_register', 'theme_customize_register');
